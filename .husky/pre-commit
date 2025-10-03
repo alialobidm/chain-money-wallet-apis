@@ -1,0 +1,3 @@
+# Run ESLint
+echo "Running ESLint..."
+npm run lint
