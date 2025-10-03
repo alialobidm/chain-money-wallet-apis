@@ -1,5 +1,4 @@
-import { Hero } from "@/components/hero";
-import { HomeClient } from "@/components/home-client";
+import { HomeWrapper } from "@/components/home-wrapper";
 import { AppLayout } from "@/components/app-layout";
 import { db } from "@/src/db";
 import { transactionsTable, profilesTable } from "@/src/db/schema";
@@ -66,8 +65,7 @@ export default async function Home() {
 
   return (
     <AppLayout>
-      <HomeClient />
-      <Hero latestTransactions={latestTransactions} />
+      <HomeWrapper latestTransactions={latestTransactions} />
     </AppLayout>
   );
 }
