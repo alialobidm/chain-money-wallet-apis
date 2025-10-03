@@ -3,8 +3,25 @@ import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { ArrowRight, Zap, TrendingUp, ExternalLink, Info } from "lucide-react";
 import { GradientAvatar } from "@/lib/gradient-avatar";
+import { LatestTransactions } from "@/components/latest-transactions";
 
-export function Hero() {
+interface Transaction {
+  id: number;
+  transactionHash: string;
+  amount: string;
+  message: string | null;
+  createdAt: string;
+  senderDisplayName: string;
+  senderUsername: string;
+  recipientDisplayName: string;
+  recipientUsername: string;
+}
+
+interface HeroProps {
+  latestTransactions: Transaction[];
+}
+
+export function Hero({ latestTransactions }: HeroProps) {
   return (
     <div className="flex flex-col gap-16 items-center">
       {/* Main Hero Section */}
@@ -216,6 +233,9 @@ export function Hero() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Latest Transactions Section */}
+      <LatestTransactions transactions={latestTransactions} />
     </div>
   );
 }
