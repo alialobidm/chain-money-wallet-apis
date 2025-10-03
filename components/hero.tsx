@@ -7,39 +7,6 @@ import { GradientAvatar } from "@/lib/gradient-avatar";
 export function Hero() {
   return (
     <div className="flex flex-col gap-16 items-center">
-      {/* Demo Notice Banner */}
-      <Card className="w-full border-2 border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20">
-        <CardContent className="p-4">
-          <div className="flex items-center justify-center gap-3 text-center flex-wrap">
-            <div className="flex items-center gap-2">
-              <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0" />
-              <span className="text-sm font-medium text-blue-900 dark:text-blue-100">
-                Demo Application
-              </span>
-            </div>
-            <span className="text-sm text-blue-700 dark:text-blue-300">
-              Built with Alchemy Wallet APIs
-            </span>
-            <Button
-              asChild
-              variant="link"
-              size="sm"
-              className="h-auto p-0 text-blue-600 dark:text-blue-400"
-            >
-              <a
-                href="https://www.alchemy.com/docs/wallets/api-reference/smart-wallets/wallet-api-endpoints/wallet-api-endpoints/wallet-request-account"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1"
-              >
-                View API Docs
-                <ExternalLink className="h-3 w-3" />
-              </a>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Main Hero Section */}
       <div className="flex flex-col gap-8 items-center max-w-5xl text-center">
         <div className="flex flex-col gap-4">
@@ -59,6 +26,39 @@ export function Hero() {
             <Link href="/auth/login">Sign In</Link>
           </Button>
         </div>
+
+        {/* Demo Notice Banner */}
+        <Card className="w-full border-2 border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-center gap-3 text-center flex-wrap">
+              <div className="flex items-center gap-2">
+                <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0" />
+                <span className="text-sm font-medium text-blue-900 dark:text-blue-100">
+                  Demo Application
+                </span>
+              </div>
+              <span className="text-sm text-blue-700 dark:text-blue-300">
+                Built with Alchemy Wallet APIs
+              </span>
+              <Button
+                asChild
+                variant="link"
+                size="sm"
+                className="h-auto p-0 text-blue-600 dark:text-blue-400"
+              >
+                <a
+                  href="https://www.alchemy.com/docs/wallets/api-reference/smart-wallets/wallet-api-endpoints/wallet-api-endpoints/wallet-request-account"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1"
+                >
+                  View API Docs
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Features Grid */}
