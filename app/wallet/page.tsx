@@ -413,10 +413,15 @@ export default function WalletPage() {
                 <p className="text-sm font-medium text-foreground">
                   Get 10 test USDC from Circle faucet
                 </p>
-                <p className="text-sm text-muted-foreground">
-                  Copy your address above, paste it into the faucet, and make sure to select{" "}
-                  <span className="font-semibold">{NETWORK_NAME}</span> as the network.
-                </p>
+                <div className="p-4 rounded-lg bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 border-2 border-blue-200 dark:border-blue-800">
+                  <p className="text-sm text-muted-foreground">
+                    Copy your address above, paste it into the faucet, and{" "}
+                    <span className="font-bold text-lg bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      make sure to select {NETWORK_NAME}
+                    </span>{" "}
+                    as the network.
+                  </p>
+                </div>
                 <Button
                   size="default"
                   variant="secondary"
