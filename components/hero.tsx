@@ -134,7 +134,7 @@ export function Hero() {
                   </div>
                   <div>
                     <div className="font-semibold">Onchain & Verifiable</div>
-                    <div className="text-sm text-muted-foreground">Every transaction is recorded on Base blockchain</div>
+                    <div className="text-sm text-muted-foreground">Every transaction is recorded on Base Sepolia</div>
                   </div>
                 </div>
               </div>
@@ -190,7 +190,7 @@ export function Hero() {
                   </div>
                   <div>
                     <div className="font-semibold">Automatic Yield</div>
-                    <div className="text-sm text-muted-foreground">Earn 4% APY just by holding USDC</div>
+                    <div className="text-sm text-muted-foreground">Earn APY by holding dollars</div>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
