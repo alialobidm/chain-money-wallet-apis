@@ -18,15 +18,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Request a smart account from Alchemy for this user
-    let smartAccountAddress: string | undefined;
-    try {
-      const { address } = await requestSmartAccount(userId);
-      smartAccountAddress = address;
-      console.log(`Created smart account ${address} for user ${userId}`);
-    } catch (error) {
-      console.error("Error creating smart account:", error);
-      // Continue without smart account - can be initialized later
-    }
+    const { address } = await requestSmartAccount(userId);
+    const smartAccountAddress = address;
+    console.log(`Created smart account ${address} for user ${userId}`);
 
     // Insert the profile into the database
     const [profile] = await db

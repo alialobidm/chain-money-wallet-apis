@@ -20,6 +20,7 @@ interface UserContextType {
   profile: UserProfile | null;
   loading: boolean;
   refetchProfile: () => Promise<void>;
+  refetchUser: () => Promise<void>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -48,18 +49,22 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  useEffect(() => {
-    const getUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
-      
-      if (user) {
-        await fetchProfile(user.id);
-      }
-      
-      setLoading(false);
-    };
+  const getUser = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    setUser(user);
 
+    if (user) {
+      await fetchProfile(user.id);
+    }
+
+    setLoading(false);
+  };
+
+  const refetchUser = async () => {
+    await getUser();
+  };
+
+  useEffect(() => {
     getUser();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -81,7 +86,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }, [supabase.auth]);
 
   return (
-    <UserContext.Provider value={{ user, profile, loading, refetchProfile }}>
+    <UserContext.Provider value={{ user, profile, loading, refetchProfile, refetchUser }}>
       {children}
     </UserContext.Provider>
   );
