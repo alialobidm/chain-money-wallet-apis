@@ -77,6 +77,25 @@ npm run dev
 
 Visit [http://localhost:3000](http://localhost:3000)
 
+## Deployment
+
+Deploy to [Vercel](https://vercel.com) with one command:
+
+```bash
+npm run deploy
+```
+
+Or deploy to production:
+
+```bash
+npm run deploy:prod
+```
+
+**After deploying**, make sure to set up your environment variables in the Vercel dashboard:
+1. Go to your project settings → Environment Variables
+2. Add all variables from `.env.example`
+3. Redeploy to apply changes
+
 ## How It Works
 
 1. **Sign Up** - Users create an account with email/password
