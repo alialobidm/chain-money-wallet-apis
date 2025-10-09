@@ -1,104 +1,104 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# ChainMoney Demo
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
+A simple payment application with server-side smart account wallets, USDC transfers, and gasless transactions on Arbitrum Sepolia. Earn interest on idle USDC balances with Aave integration.
 
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+## Quick Start
 
-## Features
+### 1. Clone and Install
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Middleware
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Password-based authentication block installed via the [Supabase UI Library](https://supabase.com/ui/docs/nextjs/password-based-auth)
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+```bash
+git clone <your-repo-url>
+cd onchain-payments
+npm install
+```
 
-## Demo
+### 2. Set Up Environment Variables
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+Copy `.env.example` to `.env`:
 
-## Deploy to Vercel
+```bash
+cp .env.example .env
+```
 
-Vercel deployment will guide you through creating a Supabase account and project.
+Then fill in the required values:
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+#### **Supabase** (Authentication)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+- Get from: https://app.supabase.com/project/_/settings/api
+- `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Your Supabase anonymous key
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+#### **Database** (PostgreSQL)
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+- Can be any PostgreSQL database, including Supabase
+- For Supabase: https://app.supabase.com/project/_/settings/database
+- `DATABASE_URL` - Full PostgreSQL connection string
 
-## Clone and run locally
+#### **Alchemy** (Smart Account Wallets)
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+- Get from: https://dashboard.alchemy.com/
+- Create an app and a gas policy
+- `ALCHEMY_API_KEY` - Your Alchemy API key
+- `ALCHEMY_POLICY_ID` - Your Alchemy gas sponsorship policy ID
+- ⚠️ These are server-side only and never exposed to the client
 
-2. Create a Next.js app using the Supabase Starter template npx command
+#### **Master Wallet** (Transaction Signing)
 
-   ```bash
-   npx create-next-app --example with-supabase with-supabase-app
-   ```
+- Generate a new private key:
+  ```bash
+  node -e "console.log('0x' + require('crypto').randomBytes(32).toString('hex'))"
+  ```
+- `MASTER_WALLET_PRIVATE_KEY` - The generated private key
 
-   ```bash
-   yarn create next-app --example with-supabase with-supabase-app
-   ```
+**⚠️ Security Note:** This master wallet approach is for demo purposes only. In production, use:
 
-   ```bash
-   pnpm create next-app --example with-supabase with-supabase-app
-   ```
+- Hardware Security Modules (HSM)
+- Multi-Party Computation (MPC) services (e.g., Fireblocks, BitGo)
+- Secure key management systems (e.g., AWS KMS, HashiCorp Vault)
+- Multi-signature setups
 
-3. Use `cd` to change into the app's directory
+Different institutions have different security practices for private key management. Choose the approach that fits your security requirements.
 
-   ```bash
-   cd with-supabase-app
-   ```
+### 3. Set Up Database
 
-4. Rename `.env.example` to `.env.local` and update the following:
+Run the database migrations:
 
-   ```
-   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
-   ```
+```bash
+npm run drizzle-kit push
+```
 
-   Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://supabase.com/dashboard/project/_?showConnect=true)
+### 4. Run the App
 
-5. You can now run the Next.js local development server:
+```bash
+npm run dev
+```
 
-   ```bash
-   npm run dev
-   ```
+Visit [http://localhost:3000](http://localhost:3000)
 
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
+## How It Works
 
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
+1. **Sign Up** - Users create an account with email/password
+2. **Smart Account** - A smart account wallet is automatically created for each user
+3. **Get USDC** - Users get testnet USDC from Circle's faucet
+4. **Send Payments** - Send gasless USDC payments to other users
+5. **Earn Interest** - Toggle on Aave to automatically earn interest on idle USDC balances
+6. **View Transactions** - See all transactions on Arbitrum Sepolia
 
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
+## Tech Stack
 
-## Feedback and issues
+- **Next.js 14** - App Router
+- **Supabase** - Authentication and PostgreSQL database
+- **Alchemy** - Smart account wallet infrastructure
+- **Aave** - For earning interest on the USDC
+- **Arbitrum Sepolia** - Testnet blockchain
+- **USDC** - Real testnet USDC token
+- **Tailwind CSS + shadcn/ui** - Styling and components
 
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
+## Key Features
 
-## More Supabase examples
-
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+- ✅ No wallet installation required for users
+- ✅ One-click gasless payments
+- ✅ Server-side transaction signing
+- ✅ Real USDC on Arbitrum Sepolia testnet
+- ✅ Earn interest with Aave - simple toggle to start earning
+- ✅ Transaction history and receipts
