@@ -64,7 +64,7 @@ Different institutions have different security practices for private key managem
 Run the database migrations:
 
 ```bash
-npm run drizzle-kit push
+npx drizzle-kit push
 ```
 
 ### 4. Run the App

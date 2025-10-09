@@ -4,6 +4,8 @@ CREATE TABLE "profiles" (
 	"username" varchar(50) NOT NULL,
 	"displayName" varchar(100) NOT NULL,
 	"smartAccountAddress" varchar(255),
+	"receivedWelcomeBonus" boolean DEFAULT false NOT NULL,
+	"isEarningYield" boolean DEFAULT false NOT NULL,
 	"signerAddress" varchar(255),
 	"paymentAddress" varchar(255),
 	CONSTRAINT "profiles_userId_unique" UNIQUE("userId"),

@@ -1,5 +1,5 @@
 {
-  "id": "8df8c501-1f9b-4365-b514-9450c922413e",
+  "id": "b62780ec-f6db-4765-a69d-3d2f8170fddd",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -48,6 +48,20 @@
           "type": "varchar(255)",
           "primaryKey": false,
           "notNull": false
+        },
+        "receivedWelcomeBonus": {
+          "name": "receivedWelcomeBonus",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "isEarningYield": {
+          "name": "isEarningYield",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
         },
         "signerAddress": {
           "name": "signerAddress",
