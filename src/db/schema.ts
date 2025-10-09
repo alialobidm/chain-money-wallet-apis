@@ -16,8 +16,6 @@ export const profilesTable = pgTable("profiles", {
   smartAccountAddress: varchar({ length: 255 }), // Alchemy smart account address
   receivedWelcomeBonus: boolean().default(false).notNull(), // Track if user received $1 welcome bonus
   isEarningYield: boolean().default(false).notNull(), // Track if user has yield earning enabled
-  signerAddress: varchar({ length: 255 }), // DEPRECATED: Keep for migration
-  paymentAddress: varchar({ length: 255 }), // DEPRECATED: Keep for migration
 });
 
 export const transactionsTable = pgTable("transactions", {

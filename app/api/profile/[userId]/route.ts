@@ -19,8 +19,6 @@ export async function GET(
         displayName: profilesTable.displayName,
         smartAccountAddress: profilesTable.smartAccountAddress,
         isEarningYield: profilesTable.isEarningYield,
-        signerAddress: profilesTable.signerAddress,
-        paymentAddress: profilesTable.paymentAddress,
       })
       .from(profilesTable)
       .where(eq(profilesTable.userId, userId))

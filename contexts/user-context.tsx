@@ -11,7 +11,6 @@ interface UserProfile {
   displayName: string;
   smartAccountAddress: string | null;
   isEarningYield: boolean;
-  signerAddress: string | null; // DEPRECATED
   paymentAddress: string | null; // DEPRECATED
 }
 
@@ -50,7 +49,9 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   const getUser = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     setUser(user);
 
     if (user) {
@@ -67,26 +68,28 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     getUser();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        const currentUser = session?.user ?? null;
-        setUser(currentUser);
-        
-        if (currentUser) {
-          await fetchProfile(currentUser.id);
-        } else {
-          setProfile(null);
-        }
-        
-        setLoading(false);
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+
+      if (currentUser) {
+        await fetchProfile(currentUser.id);
+      } else {
+        setProfile(null);
       }
-    );
+
+      setLoading(false);
+    });
 
     return () => subscription.unsubscribe();
   }, [supabase.auth]);
 
   return (
-    <UserContext.Provider value={{ user, profile, loading, refetchProfile, refetchUser }}>
+    <UserContext.Provider
+      value={{ user, profile, loading, refetchProfile, refetchUser }}
+    >
       {children}
     </UserContext.Provider>
   );
