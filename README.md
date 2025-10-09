@@ -61,11 +61,13 @@ Different institutions have different security practices for private key managem
 
 ### 3. Set Up Database
 
-Run the database migrations:
+Push the database schema to your PostgreSQL database:
 
 ```bash
-npx drizzle-kit push
+npm run db:push
 ```
+
+This uses [Drizzle Kit](https://orm.drizzle.team/kit-docs/overview) to read your schema from `src/db/schema.ts` and create the tables directly. For future schema changes, you can use [Drizzle migrations](https://orm.drizzle.team/docs/migrations) to track changes over time.
 
 ### 4. Run the App
 
